@@ -26,18 +26,22 @@ namespace ASW4016_02_Week3
             }
 
             // 시저암호 생성 함수
-            public void sentenceToCaesar()
+            public void sentenceToCaesar(string filename)
             {
                 try
                 {
                     Random rnd = new Random();
+                    StreamWriter sw = new StreamWriter(filename);
 
+                    int lineIdx = 0;
                     foreach(string line in plainSet)
                     {
                         int n_shift = rnd.Next(1, 26);
 
                         string[] data = line.Split(' ');
-                        foreach(string d in data)
+                        string tmpCrypt = "";
+
+                        foreach (string d in data)
                         {
                             for (int i = 0; i < d.Length; i++)
                             {
@@ -45,13 +49,43 @@ namespace ASW4016_02_Week3
                                 시저 암호 생성부. n_shift를 이용해 아스키 코드 상의 알파벳 범위 안에서 순환
                                 대문자는 대문자끼리, 소문자는 소문자끼리 순환
                                 */
+                                char tmp = d[i];
+                                if (tmp >= 65 && tmp <= 90)
+                                {
+                                    tmp = Convert.ToChar(tmp + n_shift);
+                                    if (tmp > 90)
+                                    {
+                                        tmp = Convert.ToChar(tmp - 90 + 64);
+                                    }
+                                }
+                                else if (d[i] >= 97 && d[i] <= 122)
+                                {
+                                    tmp = Convert.ToChar(tmp + n_shift);
+                                    if (tmp > 122)
+                                    {
+                                        tmp = Convert.ToChar(tmp - 122 + 97);
+                                    }
+                                }
+                                tmpCrypt += tmp;
                             }
+                            tmpCrypt += " ";
                         }
-                    }
-                }
-                catch (Exception ex)
-                {
 
+                        cryptSet.Add(tmpCrypt);
+
+                        // 암호문 텍스트 파일로 저장
+                        sw.WriteLine(cryptSet[lineIdx]);
+
+                        // debug
+                        Console.WriteLine(cryptSet[lineIdx]);
+                        lineIdx++;
+                    }
+
+                    sw.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exception: " + e.Message);
                 }
             }
 

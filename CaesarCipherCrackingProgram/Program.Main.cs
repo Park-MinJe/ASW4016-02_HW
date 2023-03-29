@@ -24,6 +24,8 @@ namespace ASW4016_02_Week3
                 dic.readWordsFromCsvlFile(fileLoc);
 
                 sent.writePlainSetAsTxt(Convert.ToString(Console.ReadLine()));
+
+                sent.sentenceToCaesar(Convert.ToString(Console.ReadLine()));
             }
             catch (Exception ex)
             {
