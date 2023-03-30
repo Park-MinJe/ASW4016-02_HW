@@ -41,6 +41,7 @@ namespace ASW4016_02_Week3
                         string[] data = line.Split(' ');
                         string tmpCrypt = "";
 
+                        int dataIdx = 0;
                         foreach (string d in data)
                         {
                             for (int i = 0; i < d.Length; i++)
@@ -58,17 +59,21 @@ namespace ASW4016_02_Week3
                                         tmp = Convert.ToChar(tmp - 90 + 64);
                                     }
                                 }
-                                else if (d[i] >= 97 && d[i] <= 122)
+                                else if (tmp >= 97 && tmp <= 122)
                                 {
                                     tmp = Convert.ToChar(tmp + n_shift);
                                     if (tmp > 122)
                                     {
-                                        tmp = Convert.ToChar(tmp - 122 + 97);
+                                        tmp = Convert.ToChar(tmp - 122 + 96);
                                     }
                                 }
                                 tmpCrypt += tmp;
                             }
-                            tmpCrypt += " ";
+                            if (dataIdx < data.Length - 1)
+                            {
+                                tmpCrypt += " ";
+                            }
+                            dataIdx++;
                         }
 
                         cryptSet.Add(tmpCrypt);
@@ -77,7 +82,7 @@ namespace ASW4016_02_Week3
                         sw.WriteLine(cryptSet[lineIdx]);
 
                         // debug
-                        Console.WriteLine(cryptSet[lineIdx]);
+                        //Console.WriteLine(cryptSet[lineIdx]);
                         lineIdx++;
                     }
 
@@ -85,7 +90,7 @@ namespace ASW4016_02_Week3
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Exception: " + e.Message);
+                    Console.WriteLine("sentenceToCaesar(string): " + e.Message);
                 }
             }
 
@@ -125,7 +130,7 @@ namespace ASW4016_02_Week3
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Exception: " + e.Message);
+                    Console.WriteLine("writePlainSetAsTxt(string): " + e.Message);
                 }
                 finally
                 {
@@ -154,7 +159,7 @@ namespace ASW4016_02_Week3
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Exception: " + e.Message);
+                    Console.WriteLine("readPlainSetFromTxt(string): " + e.Message);
                 }
                 finally
                 {

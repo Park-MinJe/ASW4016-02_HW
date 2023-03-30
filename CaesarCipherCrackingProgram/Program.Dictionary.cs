@@ -20,6 +20,28 @@ namespace ASW4016_02_Week3
                 words = new List<string>();
             }
 
+            public bool findWordAtDict(string s)
+            {
+                for (int i = 0; i < words.Count; i++)
+                {
+                    if (words[i] == s) return true;
+                }
+
+                //for (int i = 0; i < words.Count / 2; i++)
+                //{
+                //    if (words[i] == s.ToLower())
+                //    {
+                //        return true;
+                //    }
+                //    if (words[words.Count - i - 1] == s.ToLower())
+                //    {
+                //        return true;
+                //    }
+                //}
+
+                return false;
+            }
+
             public void readWordsFromCsvlFile(string filename)
             {
                 try
@@ -51,7 +73,7 @@ namespace ASW4016_02_Week3
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine(e.ToString());
+                    Console.WriteLine("readWordsFromCsvlFile(string): " + e.Message);
                 }
             }
         }
